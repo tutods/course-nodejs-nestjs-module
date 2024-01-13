@@ -6,16 +6,18 @@ const config = defineConfig({
   test: {
     globals: true,
     root: './',
+    include: ['**/*.spec.ts'],
     coverage: {
       enabled: false,
       provider: 'v8',
       include: ['src/**/*.ts'],
+      reporter: ['html'],
       all: false,
       clean: true,
       cleanOnRerun: true,
+      reportOnFailure: true,
       thresholds: {
         perFile: true,
-        autoUpdate: true,
         branches: 80,
         functions: 80,
         lines: 80,
