@@ -2,7 +2,7 @@ import swc from 'unplugin-swc';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
-const config = defineConfig({
+export default defineConfig({
   test: {
     globals: true,
     root: './',
@@ -34,5 +34,3 @@ const config = defineConfig({
     }),
   ],
 });
-
-export default config;
