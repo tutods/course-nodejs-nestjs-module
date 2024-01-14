@@ -1,5 +1,5 @@
 import type { CreateUserDTO } from '@modules/users/dtos/user.dto';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
 
 import { PrismaService } from '@/infra/database/prisma.service';
 
@@ -15,7 +15,7 @@ export class CreateUserUseCase {
     });
 
     if (!!userExists) {
-      throw new BadRequestException('User already exists!');
+      throw new ConflictException('User already exists!');
     }
 
     return await this.prisma.user.create({
