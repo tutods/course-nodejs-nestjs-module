@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '@/infra/database/prisma.service';
+import { prismaExclude } from '@/infra/database/prisma-exclude';
 import type { CreateUserDTO, UserDTO } from '@modules/users/dtos/user.dto';
 import type { IUserRepository } from '@modules/users/repositories/user.repository';
 
@@ -30,5 +31,23 @@ export class UserPrismaRepository implements IUserRepository {
         OR: [{ username: data.username }, { email: data.email }],
       },
     });
+  }
+
+  /**
+   * Method to retrieve an user using the unique id
+   * @param id User id
+   * @returns User or null
+   */
+  async findById(id: string, includePassword = false) {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      select: !includePassword ? prismaExclude('User', ['password']) : undefined,
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
   }
 }

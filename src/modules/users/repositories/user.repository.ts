@@ -14,4 +14,14 @@ export abstract class IUserRepository {
   abstract findByUsernameOrEmail(
     data: Partial<Pick<UserDTO, 'email' | 'username'>>,
   ): Promise<UserDTO | null>;
+
+  /**
+   * Method to retrieve an user using the unique id
+   * @param id User id
+   * @params includePassword Should include or not the password field
+   */
+  abstract findById(
+    id: string,
+    includePassword?: boolean,
+  ): Promise<UserDTO | Omit<UserDTO, 'password'> | null>;
 }

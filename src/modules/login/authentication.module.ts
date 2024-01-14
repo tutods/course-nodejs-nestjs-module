@@ -9,7 +9,7 @@ import { SignInUseCase } from '@modules/login/usecases/sign-in.usecase';
   imports: [
     JwtModule.register({
       global: true,
-      secret: 'teste-secret',
+      secret: 'test-secret',
       signOptions: {
         expiresIn: '60s',
       },
