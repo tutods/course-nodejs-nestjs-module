@@ -1,7 +1,8 @@
-import type { CreateUserDTO } from '@modules/users/dtos/user.dto';
-import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
+import { hash } from 'bcrypt';
 
 import { PrismaService } from '@/infra/database/prisma.service';
+import type { CreateUserDTO } from '@modules/users/dtos/user.dto';
 
 @Injectable()
 export class CreateUserUseCase {
@@ -18,8 +19,13 @@ export class CreateUserUseCase {
       throw new ConflictException('User already exists!');
     }
 
+    const hashedPassword = await hash(data.password, 10);
+
     return await this.prisma.user.create({
-      data,
+      data: {
+        ...data,
+        password: hashedPassword,
+      },
     });
   }
 }
