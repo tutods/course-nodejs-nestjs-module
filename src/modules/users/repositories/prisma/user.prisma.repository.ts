@@ -24,7 +24,7 @@ export class UserPrismaRepository implements IUserRepository {
    * @param data Username and email to search on database
    * @returns User or null
    */
-  async findByUsernameOrEmail(data: Pick<UserDTO, 'email' | 'username'>) {
+  async findByUsernameOrEmail(data: Partial<Pick<UserDTO, 'email' | 'username'>>) {
     return await this.prisma.user.findFirst({
       where: {
         OR: [{ username: data.username }, { email: data.email }],

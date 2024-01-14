@@ -12,6 +12,6 @@ export abstract class IUserRepository {
    * @param value Email or username
    */
   abstract findByUsernameOrEmail(
-    data: Pick<UserDTO, 'email' | 'username'>,
+    data: Partial<Pick<UserDTO, 'email' | 'username'>>,
   ): Promise<UserDTO | null>;
 }
