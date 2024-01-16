@@ -13,12 +13,16 @@ export class ZodValidationPipe implements PipeTransform {
     } catch (error: ZodError | any) {
       if (error instanceof ZodError && error.name === 'ZodError') {
         throw new BadRequestException({
-          message: 'Validation failed! Please validate the values again.',
+          success: false,
           errors: error.issues,
         });
       }
 
-      throw new BadRequestException('Validation error, please validate all the values.');
+      throw new BadRequestException({
+        success: false,
+        message: 'Validation error, please validate all the values.',
+        errors: [],
+      });
     }
   }
 }

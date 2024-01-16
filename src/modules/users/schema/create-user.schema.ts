@@ -6,3 +6,5 @@ export const createUserSchema = z.object({
   username: z.string().min(1),
   password: z.string().min(6),
 });
+
+export const createUserResponseSchema = createUserSchema.omit({ password: true });
