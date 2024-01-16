@@ -1,4 +1,4 @@
-import type { CreateUserDTO, UserDTO } from '@modules/users/dtos/user.dto';
+import type { CreateUserDTO, UserDTO } from '@modules/users/dto/user.dto';
 
 export abstract class IUserRepository {
   /**

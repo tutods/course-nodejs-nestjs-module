@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '@/infra/database/prisma.service';
 import { prismaExclude } from '@/infra/database/prisma-exclude';
-import type { CreateUserDTO, UserDTO } from '@modules/users/dtos/user.dto';
+import type { CreateUserDTO, UserDTO } from '@modules/users/dto/user.dto';
 import type { IUserRepository } from '@modules/users/repositories/user.repository';
 
 @Injectable()

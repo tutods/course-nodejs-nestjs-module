@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Post, Request, UseGuards, UsePipes } from '@nestjs/common';
 
+import { ZodValidationPipe } from '@/infra/pipes/zod.pipe';
 import { IsAuthenticatedGuard } from '@modules/login/guards/is-authenticated.guard';
-import { CreateUserDTO } from '@modules/users/dtos/user.dto';
+import { CreateUserDTO } from '@modules/users/dto/user.dto';
+import { createUserSchema } from '@modules/users/schema/create-user.schema';
 import { CreateUserUseCase } from '@modules/users/usecases/create-user.usecase';
 import { UserProfileUseCase } from '@modules/users/usecases/user-profile.usecase';
-
-import { CreateUserValidationPipe } from './pipe/create-user.validation.pipe';
 
 @Controller('users')
 export class UsersController {
@@ -15,7 +15,7 @@ export class UsersController {
   ) {}
 
   @Post()
-  @UsePipes(new CreateUserValidationPipe())
+  @UsePipes(new ZodValidationPipe(createUserSchema))
   async create(@Body() data: CreateUserDTO) {
     return await this.createUserUseCase.execute(data);
   }
