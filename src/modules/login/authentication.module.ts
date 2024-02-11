@@ -11,7 +11,7 @@ import { SignInUseCase } from '@modules/login/usecases/sign-in.usecase';
       global: true,
       secret: 'test-secret',
       signOptions: {
-        expiresIn: '60s',
+        expiresIn: '2h',
       },
     }),
   ],
