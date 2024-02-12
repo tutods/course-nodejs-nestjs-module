@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Request, UseGuards, UsePipes } from '@nestjs/common';
 
 import { ZodValidationPipe } from '@/infra/pipes/zod.pipe';
-import { IsAuthenticatedGuard } from '@modules/login/guards/is-authenticated.guard';
+import { IsAuthenticatedGuard } from '@modules/authentication/guards/is-authenticated.guard';
 import { CreateUserDTO } from '@modules/users/dto/user.dto';
 import {
   createUserResponseSchema,

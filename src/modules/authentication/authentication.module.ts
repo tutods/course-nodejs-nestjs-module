@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 
 import { PrismaService } from '@/infra/database/prisma.service';
-import { AuthenticationController } from '@modules/login/authentication.controller';
-import { SignInUseCase } from '@modules/login/usecases/sign-in.usecase';
+import { AuthenticationController } from '@modules/authentication/authentication.controller';
+import { SignInUseCase } from '@modules/authentication/usecases/sign-in.usecase';
 
 @Module({
   imports: [

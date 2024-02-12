@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 
 import { PrismaService } from '@/infra/database/prisma.service';
-import type { SignInDTO } from '@modules/login/dto/sign-in.dto';
+import type { SignInDTO } from '@modules/authentication/dto/sign-in.dto';
 
 @Injectable()
 export class SignInUseCase {
