@@ -22,7 +22,7 @@ export class UsersController {
   async create(@Body() data: CreateUserDTO) {
     const user = await this.createUserUseCase.execute(data);
 
-    return createUserResponseSchema.safeParse(user);
+    return createUserResponseSchema.parse(user);
   }
 
   @Get('me')

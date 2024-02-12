@@ -17,7 +17,35 @@ model User {
   name     String
   password String
 
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
+  userTasks UserTask[]
 
   @@map("users")
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  startAt     DateTime
+  endAt       DateTime
+  priority    String
+  status      String
+
+  userTasks UserTask[]
+
+  @@map("tasks")
+}
+
+model UserTask {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  taskId String
+  task   Task   @relation(fields: [taskId], references: [id])
+
+  @@map("user_tasks")
 }
