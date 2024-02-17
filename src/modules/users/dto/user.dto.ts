@@ -8,3 +8,12 @@ export type CreateUserDTO = Omit<Prisma.UserCreateInput, 'createdAt' | 'id'>;
 export type CreateUserResponseDTO = z.infer<typeof createUserResponseSchema>;
 
 export type UserDTO = Prisma.UserGetPayload<false>;
+
+export type FileDTO = {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  buffer: Buffer;
+  size: number;
+};

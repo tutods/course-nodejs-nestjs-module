@@ -1,8 +1,19 @@
-import { Body, Controller, Get, Post, Request, UseGuards, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+  UsePipes,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 import { ZodValidationPipe } from '@/infra/pipes/zod.pipe';
 import { AuthenticationGuard } from '@modules/authentication/guards/authenticated.guard';
-import { CreateUserDTO } from '@modules/users/dto/user.dto';
+import { CreateUserDTO, FileDTO } from '@modules/users/dto/user.dto';
 import {
   createUserResponseSchema,
   createUserSchema,
@@ -29,5 +40,13 @@ export class UserController {
   @UseGuards(AuthenticationGuard)
   async profile(@Request() req) {
     return this.profileUseCase.execute(req.user.sub);
+  }
+
+  @Post('avatar')
+  @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(AuthenticationGuard)
+  async uploadAvatar(@UploadedFile() file: FileDTO, @Request() request) {
+    console.log(file);
+    return {};
   }
 }

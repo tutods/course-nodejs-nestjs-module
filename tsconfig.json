@@ -10,7 +10,8 @@
     "target": "es2021",
     "types": [
       "node",
-      "vitest/globals"
+      "vitest/globals",
+      "Multer"
     ],
     "sourceMap": true,
     "incremental": true,
