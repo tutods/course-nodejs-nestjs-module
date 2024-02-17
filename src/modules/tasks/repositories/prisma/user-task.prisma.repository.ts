@@ -1,7 +1,10 @@
-import type { PrismaService } from '@/infra/database/prisma.service';
+import { Injectable } from '@nestjs/common';
+
+import { PrismaService } from '@/infra/database/prisma.service';
 import type { CreateUserTaskRequestDTO } from '@modules/tasks/dto/user-task.dto';
 import type { IUserTaskRepository } from '@modules/tasks/repositories/user-task.repository';
 
+@Injectable()
 export class UserTaskPrismaRepository implements IUserTaskRepository {
   constructor(private prisma: PrismaService) {}
 

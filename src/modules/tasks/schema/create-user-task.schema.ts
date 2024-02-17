@@ -6,8 +6,8 @@ import { TaskStatus } from '@modules/tasks/enums/task-status.enum';
 export const createUserTaskRawSchema = z.object({
   title: z.string(),
   description: z.string(),
-  startAt: z.date(),
-  endAt: z.date(),
+  startAt: z.coerce.date(),
+  endAt: z.coerce.date(),
   priority: z.nativeEnum(TaskPriority),
   status: z.nativeEnum(TaskStatus),
 });

@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Request, UseGuards, UsePipes } from '@nestjs/common';
 
 import { ZodValidationPipe } from '@/infra/pipes/zod.pipe';
-import { IsAuthenticatedGuard } from '@modules/authentication/guards/is-authenticated.guard';
+import { AuthenticationGuard } from '@modules/authentication/guards/authenticated.guard';
 import { CreateUserDTO } from '@modules/users/dto/user.dto';
 import {
   createUserResponseSchema,
@@ -11,7 +11,7 @@ import { CreateUserUseCase } from '@modules/users/usecases/create-user.usecase';
 import { UserProfileUseCase } from '@modules/users/usecases/user-profile.usecase';
 
 @Controller('users')
-export class UsersController {
+export class UserController {
   constructor(
     private readonly createUserUseCase: CreateUserUseCase,
     private readonly profileUseCase: UserProfileUseCase,
@@ -26,7 +26,7 @@ export class UsersController {
   }
 
   @Get('me')
-  @UseGuards(IsAuthenticatedGuard)
+  @UseGuards(AuthenticationGuard)
   async profile(@Request() req) {
     return this.profileUseCase.execute(req.user.sub);
   }
