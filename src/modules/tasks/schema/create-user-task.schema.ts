@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { TaskPriority } from '@modules/tasks/enums/task-priority.enum';
 import { TaskStatus } from '@modules/tasks/enums/task-status.enum';
 
-export const createUserTaskSchema = z.object({
+export const createUserTaskRawSchema = z.object({
   title: z.string(),
   description: z.string(),
   startAt: z.date(),
@@ -11,3 +11,9 @@ export const createUserTaskSchema = z.object({
   priority: z.nativeEnum(TaskPriority),
   status: z.nativeEnum(TaskStatus),
 });
+
+export const createUserTaskSchema = createUserTaskRawSchema.merge(
+  z.object({
+    userId: z.string().uuid(),
+  }),
+);
