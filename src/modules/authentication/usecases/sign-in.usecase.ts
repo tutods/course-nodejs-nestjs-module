@@ -4,7 +4,7 @@ import { compare } from 'bcrypt';
 
 import { PrismaService } from '@/infra/database/prisma.service';
 import type { SignInRequestDTO } from '@modules/authentication/dto/sign-in.dto';
-import { userResponseSchema } from '@modules/users/schemas/user.schema';
+import { createUserSchema } from '@modules/users/schemas/create-user.schema';
 
 @Injectable()
 export class SignInUseCase {
@@ -33,7 +33,7 @@ export class SignInUseCase {
     }
 
     // Remove password from user
-    const userData = userResponseSchema.parse(user);
+    const userData = createUserSchema.parse(user);
 
     // Generate JWT Token
     const token = await this.jwtService.signAsync({
