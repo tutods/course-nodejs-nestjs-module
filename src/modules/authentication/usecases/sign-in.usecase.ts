@@ -32,12 +32,12 @@ export class SignInUseCase {
       throw new UnauthorizedException("Username or password din't match.");
     }
 
-    // Remove password from user
+    // Remove password and if from user
     const userData = createUserSchema.parse(user);
 
     // Generate JWT Token
     const token = await this.jwtService.signAsync({
-      sub: user.id,
+      sub: user.id, // only storage user id on sub
       user: userData,
     });
 
