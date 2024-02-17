@@ -6,7 +6,7 @@ import { CreateUserDTO } from '@modules/users/dto/user.dto';
 import {
   createUserResponseSchema,
   createUserSchema,
-} from '@modules/users/schema/create-user.schema';
+} from '@modules/users/schemas/create-user.schema';
 import { CreateUserUseCase } from '@modules/users/usecases/create-user.usecase';
 import { UserProfileUseCase } from '@modules/users/usecases/user-profile.usecase';
 

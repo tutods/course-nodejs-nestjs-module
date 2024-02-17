@@ -3,7 +3,8 @@ import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 
 import { PrismaService } from '@/infra/database/prisma.service';
-import type { SignInDTO } from '@modules/authentication/dto/sign-in.dto';
+import type { SignInRequestDTO } from '@modules/authentication/dto/sign-in.dto';
+import { userResponseSchema } from '@modules/users/schemas/user.schema';
 
 @Injectable()
 export class SignInUseCase {
@@ -12,7 +13,7 @@ export class SignInUseCase {
     private readonly prisma: PrismaService,
   ) {}
 
-  async execute(data: SignInDTO) {
+  async execute(data: SignInRequestDTO) {
     // Validate if user exists on database
     const user = await this.prisma.user.findFirst({
       where: {
@@ -32,7 +33,7 @@ export class SignInUseCase {
     }
 
     // Remove password from user
-    const { password: _password, ...userData } = user;
+    const userData = userResponseSchema.parse(user);
 
     // Generate JWT Token
     const token = await this.jwtService.signAsync({

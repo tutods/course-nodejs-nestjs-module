@@ -3,7 +3,7 @@ import { Body, Controller, Post, Request, UseGuards, UsePipes } from '@nestjs/co
 import { ZodValidationPipe } from '@/infra/pipes/zod.pipe';
 import { AuthenticationGuard } from '@modules/authentication/guards/authenticated.guard';
 import { CreateUserTaskRawRequestDTO } from '@modules/tasks/dto/user-task.dto';
-import { createUserTaskRawSchema } from '@modules/tasks/schema/create-user-task.schema';
+import { createUserTaskRawSchema } from '@modules/tasks/schemas/create-user-task.schema';
 import { CreateUserTaskUseCase } from '@modules/tasks/usecases/create-user-task.usecase';
 
 @Controller('tasks')
