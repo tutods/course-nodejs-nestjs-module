@@ -22,7 +22,7 @@ export class SupabaseStorage implements IStorage {
 
     if (error !== null && !data) {
       return {
-        error,
+        error: error as Error,
       };
     }
 
