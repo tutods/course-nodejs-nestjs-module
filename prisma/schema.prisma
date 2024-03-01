@@ -16,7 +16,8 @@ model User {
   email     String   @unique
   name      String
   password  String
-  createdAt DateTime @default(now())
+  avatarUrl String?  @map("avatar_url")
+  createdAt DateTime @default(now()) @map("created_at")
 
   userTasks UserTask[]
 
@@ -27,8 +28,8 @@ model Task {
   id          String   @id @default(uuid())
   title       String
   description String
-  startAt     DateTime
-  endAt       DateTime
+  startAt     DateTime @map("start_at")
+  endAt       DateTime @map("end_At")
   priority    String
   status      String
 
@@ -41,7 +42,7 @@ model UserTask {
   id        String   @id @default(uuid())
   userId    String
   taskId    String
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @map("ceated_at")
 
   user User @relation(fields: [userId], references: [id])
   task Task @relation(fields: [taskId], references: [id])

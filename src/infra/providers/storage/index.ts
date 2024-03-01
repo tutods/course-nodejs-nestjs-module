@@ -1,17 +1,19 @@
 import type { FileDTO } from '@modules/users/dto/user.dto';
 
 export abstract class IStorage {
-  abstract upload(
+  abstract utepload(
     file: FileDTO,
     folder: string,
   ): Promise<
     | {
-        data: { path: string };
-        error: null;
+        path: string;
+        error: never;
       }
     | {
-        data: null;
-        error: unknown;
+        path: never;
+        error: Error;
       }
   >;
+
+  abstract getPublicUrl(path: string): Promise<string>;
 }

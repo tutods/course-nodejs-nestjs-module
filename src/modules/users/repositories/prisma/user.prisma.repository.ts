@@ -15,18 +15,18 @@ export class UserPrismaRepository implements IUserRepository {
    * @returns Created used
    */
   async save(data: CreateUserDTO) {
-    return await this.prisma.user.create({
+    return this.prisma.user.create({
       data,
     });
   }
 
   /**
-   * Method to find an user by email or username
+   * Method to find a user by email or username
    * @param data Username and email to search on database
    * @returns User or null
    */
   async findByUsernameOrEmail(data: Partial<Pick<UserDTO, 'email' | 'username'>>) {
-    return await this.prisma.user.findFirst({
+    return this.prisma.user.findFirst({
       where: {
         OR: [{ username: data.username }, { email: data.email }],
       },
@@ -34,7 +34,7 @@ export class UserPrismaRepository implements IUserRepository {
   }
 
   /**
-   * Method to retrieve an user using the unique id
+   * Method to retrieve a user using the unique id
    * @param id User id
    * @returns User or null
    */
@@ -49,5 +49,21 @@ export class UserPrismaRepository implements IUserRepository {
     }
 
     return user;
+  }
+
+  /**
+   * Method to assing an uploaded avatar to a user
+   * @param id
+   * @param path
+   */
+  async uploadAvatar(id: string, path: string) {
+    await this.prisma.user.update({
+      data: {
+        avatarUrl: path,
+      },
+      where: {
+        id,
+      },
+    });
   }
 }

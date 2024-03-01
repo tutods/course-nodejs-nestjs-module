@@ -16,7 +16,7 @@ export abstract class IUserRepository {
   ): Promise<UserDTO | null>;
 
   /**
-   * Method to retrieve an user using the unique id
+   * Method to retrieve a user using the unique id
    * @param id User id
    * @params includePassword Should include or not the password field
    */
@@ -24,4 +24,11 @@ export abstract class IUserRepository {
     id: string,
     includePassword?: boolean,
   ): Promise<UserDTO | Omit<UserDTO, 'password'> | null>;
+
+  /**
+   * Method to assing an uploaded avatar to a user
+   * @param id User id
+   * @param path Avatar path/url
+   */
+  abstract uploadAvatar(id: string, path: string): Promise<void>;
 }
