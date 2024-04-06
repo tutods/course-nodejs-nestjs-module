@@ -78,4 +78,5 @@ Nest is [MIT licensed](LICENSE).
 
 - [x] use **SWC**;
 - [x] use **Vitest** for tests;
-- [x] use `fakerjs` for generate dummy data on tests.
+- [x] use `fakerjs` for generate dummy data on tests;
+- [x] implement a simple zod validator, avoiding adding a new package for that.

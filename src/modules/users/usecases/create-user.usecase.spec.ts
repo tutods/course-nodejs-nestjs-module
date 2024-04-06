@@ -1,7 +1,6 @@
-import { faker } from '@faker-js/faker';
 import { Test } from '@nestjs/testing';
 
-import type { CreateUserDTO } from '@modules/users/dto/user.dto';
+import { mockUser } from '@modules/users/mocks/user.mock';
 import { UserInMemoryRepository } from '@modules/users/repositories/in-memory/user-in-memory.repository';
 import { IUserRepository } from '@modules/users/repositories/user.repository';
 import { CreateUserUseCase } from '@modules/users/usecases/create-user.usecase';
@@ -12,23 +11,7 @@ describe('# Create User Usecase', () => {
   /**
    * Fake data for user
    */
-  const name = [faker.person.firstName(), faker.person.lastName()];
-  const data: CreateUserDTO = {
-    email: faker.internet
-      .email({
-        firstName: name[0],
-        lastName: name[1],
-      })
-      .toLowerCase(),
-    name: name.join(' '),
-    password: faker.internet.password(),
-    username: faker.internet
-      .userName({
-        firstName: name[0],
-        lastName: name[1],
-      })
-      .toLowerCase(),
-  };
+  const data = mockUser;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
