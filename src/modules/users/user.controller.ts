@@ -15,10 +15,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ZodValidationPipe } from '@/infra/pipes/zod.pipe';
 import { AuthenticationGuard } from '@modules/authentication/guards/authenticated.guard';
 import { CreateUserDTO, FileDTO } from '@modules/users/dto/user.dto';
-import {
-  createUserResponseSchema,
-  createUserSchema,
-} from '@modules/users/schemas/create-user.schema';
+import { createUserSchema } from '@modules/users/schemas/create-user.schema';
+import { userResponseSchema } from '@modules/users/schemas/user.schema';
 import { CreateUserUseCase } from '@modules/users/usecases/create-user.usecase';
 import { UploadUserAvatarUseCase } from '@modules/users/usecases/upload-user-avatar.usecase';
 import { UserProfileUseCase } from '@modules/users/usecases/user-profile.usecase';
@@ -36,7 +34,7 @@ export class UserController {
   async create(@Body() data: CreateUserDTO) {
     const user = await this.createUserUseCase.execute(data);
 
-    return createUserResponseSchema.parse(user);
+    return userResponseSchema.parse(user);
   }
 
   @Get('me')
